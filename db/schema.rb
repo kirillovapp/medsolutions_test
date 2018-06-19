@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619000129) do
+ActiveRecord::Schema.define(version: 20180619135737) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email"
@@ -21,16 +21,33 @@ ActiveRecord::Schema.define(version: 20180619000129) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
   end
 
+  create_table "audiences", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "audiences_cities", id: false, force: :cascade do |t|
+    t.integer "audience_id", null: false
+    t.integer "city_id", null: false
+  end
+
+  create_table "audiences_profession_statuses", id: false, force: :cascade do |t|
+    t.integer "audience_id", null: false
+    t.integer "profession_status_id", null: false
+  end
+
+  create_table "audiences_specializations", id: false, force: :cascade do |t|
+    t.integer "audience_id", null: false
+    t.integer "specialization_id", null: false
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "title"
     t.string "region"
     t.integer "country_id"
     t.index ["country_id"], name: "index_cities_on_country_id"
-  end
-
-  create_table "cities_news", id: false, force: :cascade do |t|
-    t.integer "news_id", null: false
-    t.integer "city_id", null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -61,11 +78,6 @@ ActiveRecord::Schema.define(version: 20180619000129) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "news_specializations", id: false, force: :cascade do |t|
-    t.integer "news_id", null: false
-    t.integer "specialization_id", null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
