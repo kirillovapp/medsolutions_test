@@ -7,9 +7,9 @@ ActiveAdmin.register Audience do
     f.inputs '' do
       f.input :title
       f.input :description
-      f.input :cities, include_blank: true, hint: "hold shift to select multiple items"
-      f.input :specializations, include_blank: true, hint: "hold shift to select multiple items"
-      f.input :profession_statuses, include_blank: true, hint: "hold shift to select multiple items"
+      f.input :cities, include_blank: true, hint: "hold shift to select multiple items, blank for all"
+      f.input :specializations, include_blank: true, hint: "hold shift to select multiple items, blank for all"
+      f.input :profession_statuses, include_blank: true, hint: "hold shift to select multiple items, blank for all"
     end
     f.actions
   end
@@ -23,6 +23,7 @@ ActiveAdmin.register Audience do
 
   # Index block
   index do
+    id_column
     column :title
     column "Cities" do |audience|
       audience.cities.map(&:title).join(', ').html_safe

@@ -7,7 +7,7 @@ ActiveAdmin.register News do
     f.inputs '' do
       f.input :title
       f.input :text
-      f.input :audiences, include_blank: true, hint: "hold shift to select multiple items"
+      f.input :audiences, include_blank: true, hint: "hold shift to select multiple items, blank for all"
     end
     f.actions
   end
@@ -19,6 +19,7 @@ ActiveAdmin.register News do
 
   # Index block
   index do
+    id_column
     column :title
     column "Audiences" do |one_news|
       one_news.audiences.map(&:title).join(', ').html_safe
